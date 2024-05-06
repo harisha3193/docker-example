@@ -1,6 +1,7 @@
 # Default values for docker-example.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+
 replicaCount: 1
 
 image:
@@ -38,7 +39,8 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8080
+  targetPort: 8080
+  port: 80
 
 ingress:
   enabled: true
@@ -71,11 +73,11 @@ resources:
 livenessProbe:
   httpGet:
     path: /
-    port: http
+    port: 8080
 readinessProbe:
   httpGet:
     path: /
-    port: http
+    port: 8080
 
 autoscaling:
   enabled: false
@@ -106,6 +108,6 @@ affinity: {}
 healthchecks:
   enabled: true
   path: /health
-  port: http
+  port: 8080
   initialDelaySeconds: 30
 
